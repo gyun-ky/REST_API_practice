@@ -30,6 +30,9 @@ public enum BaseResponseStatus {
     POST_USERS_INVALID_EMAIL(false, 2016, "이메일 형식을 확인해주세요."),
     POST_USERS_EXISTS_EMAIL(false,2017,"중복된 이메일입니다."),
 
+    //[POST] /accounts
+    POST_ACCOUNTS_EXISTS_ACCOUNTID(false, 2018, "중복된 ID 입니다"),
+
 
 
     /**

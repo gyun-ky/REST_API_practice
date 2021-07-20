@@ -41,7 +41,7 @@ public class UserDao {
                         rs.getString("ID"),
                         rs.getString("Email"),
                         rs.getString("password")),
-                getUsersByEmailParams);
+                getUsersByEmailParams); // list 받아올 때는 jdbcTemplate.query
     }
 
     public GetUserRes getUser(int userIdx){
@@ -68,7 +68,7 @@ public class UserDao {
     }
 
     public int checkEmail(String email){
-        String checkEmailQuery = "select exists(select email from UserInfo where email = ?)";
+        String checkEmailQuery = "select exists(select email from UserInfo where email = ?)"; // 존재시 1 반환, 없을 시 0 반환
         String checkEmailParams = email;
         return this.jdbcTemplate.queryForObject(checkEmailQuery,
                 int.class,

@@ -1,0 +1,14 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: demo
+
+  datasource:
+    platform: mysql
+    url: jdbc:mysql://soft-squard-rest-api.cidukzp7zb6d.ap-northeast-2.rds.amazonaws.com/rest?autoReconnect=true # 변경해주세요
+    username: admin
+    password: rldbsrla1!
+    driver-class-name: com.mysql.cj.jdbc.Driver # mysql 8버전
+    # driver-class-name: com.mysql.jdbc.Driver # mysql 5버전
