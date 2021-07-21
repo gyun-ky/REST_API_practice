@@ -4,6 +4,8 @@ com/example/demo/src/user/model/PostUserReq.java
  com.example.demo.src.user.model.PostUserReq
 com/example/demo/config/Constant.java
  com.example.demo.config.Constant
+com/example/demo/src/account/model/PatchAccountReq.java
+ com.example.demo.src.account.model.PatchAccountReq
 com/example/demo/utils/ValidationRegex.java
  com.example.demo.utils.ValidationRegex
 com/example/demo/src/user/model/PostLoginRes.java
@@ -28,6 +30,8 @@ com/example/demo/src/test/TestController.java
  com.example.demo.src.test.TestController
 com/example/demo/src/account/AccountProvider.java
  com.example.demo.src.account.AccountProvider
+com/example/demo/src/account/model/GetAccountHomeRes.java
+ com.example.demo.src.account.model.GetAccountHomeRes
 com/example/demo/src/user/model/PostLoginReq.java
  com.example.demo.src.user.model.PostLoginReq
 com/example/demo/src/account/AccountService.java

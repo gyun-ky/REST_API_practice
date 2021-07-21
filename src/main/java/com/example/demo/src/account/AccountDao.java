@@ -1,6 +1,7 @@
 package com.example.demo.src.account;
 
 import com.example.demo.src.account.model.GetAccountRes;
+import com.example.demo.src.account.model.PatchAccountReq;
 import com.example.demo.src.account.model.PostAccountReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -60,6 +61,20 @@ public class AccountDao {
         System.out.println("[DAO] insert 완료");
         query = "SELECT last_insert_id()";
         return this.jdbcTemplate.queryForObject(query, int.class);
+    }
+
+    public int updateAccount(int accountIdx, PatchAccountReq patchAccountReq){
+
+        String query = "UPDATE Account SET accountId = ?, accountName = ?, website = ?, description = ?, profileImgUrl = ?, status = ? WHERE idx = ?";
+
+        Object[] accountParams = new Object[]{
+                patchAccountReq.getAccountId(), patchAccountReq.getAccountName(), patchAccountReq.getWebsite(), patchAccountReq.getDescription(), patchAccountReq.getProfileImgUrl(), patchAccountReq.getStatus(), accountIdx
+        };
+
+        int status = this.jdbcTemplate.update(query, accountParams);
+        System.out.println("[DAO] account update complete");
+        return status;
+
     }
 
     public int checkAccountId(String newAccountId){

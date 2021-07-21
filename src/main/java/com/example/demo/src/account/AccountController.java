@@ -3,6 +3,7 @@ package com.example.demo.src.account;
 import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponse;
 import com.example.demo.src.account.model.GetAccountRes;
+import com.example.demo.src.account.model.PatchAccountReq;
 import com.example.demo.src.account.model.PostAccountReq;
 import com.example.demo.src.account.model.PostAccountRes;
 import com.example.demo.src.user.UserProvider;
@@ -10,6 +11,7 @@ import com.example.demo.src.user.UserService;
 import com.example.demo.src.user.model.GetUserRes;
 import com.example.demo.utils.JwtService;
 import com.fasterxml.jackson.databind.ser.Serializers;
+import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,15 +64,33 @@ public class AccountController {
     }
 
     @ResponseBody
-    @PostMapping("/{userIdx}")
-    public BaseResponse<PostAccountRes> createAccount(@PathVariable(required = true) int userIdx, @RequestBody PostAccountReq postAccountReq){
+    @PostMapping("/{accountIdx}")
+    public BaseResponse<PostAccountRes> createAccount(@PathVariable(required = true) int accountIdx, @RequestBody PostAccountReq postAccountReq){
         System.out.println("[POST] createAccount route");
         //형식적 validation 추가 - 이메일 정규표현
         try{
-            PostAccountRes postAccountRes = accountService.createAccount(userIdx, postAccountReq);
+            PostAccountRes postAccountRes = accountService.createAccount(accountIdx, postAccountReq);
             return new BaseResponse<>(postAccountRes);
         } catch(BaseException exception){
             return new BaseResponse<>((exception.getStatus()));
         }
     }
+
+    @ResponseBody
+    @PatchMapping("/{accountIdx}")
+    public BaseResponse<String> patchAccount(@PathVariable int accountIdx, @RequestBody PatchAccountReq patchAccountReq){
+        System.out.println("[PATCH] pathAccount route");
+
+        try{
+            accountService.patchAccount(accountIdx, patchAccountReq);
+
+            String result = "";
+            return new BaseResponse<>(result);
+        }
+        catch(BaseException exception){
+            return new BaseResponse<>((exception.getStatus()));
+        }
+
+    }
+
 }

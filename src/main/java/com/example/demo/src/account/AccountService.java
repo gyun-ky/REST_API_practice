@@ -2,14 +2,14 @@ package com.example.demo.src.account;
 
 import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponseStatus;
+import com.example.demo.src.account.model.PatchAccountReq;
 import com.example.demo.src.account.model.PostAccountReq;
 import com.example.demo.src.account.model.PostAccountRes;
 import com.example.demo.utils.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static com.example.demo.config.BaseResponseStatus.DATABASE_ERROR;
-import static com.example.demo.config.BaseResponseStatus.POST_ACCOUNTS_EXISTS_ACCOUNTID;
+import static com.example.demo.config.BaseResponseStatus.*;
 
 @Service
 public class AccountService {
@@ -38,6 +38,17 @@ public class AccountService {
             //jwt 발급은 추후에 구현
             return new PostAccountRes(accountIdx);
         } catch (Exception exception){
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public void patchAccount(int accountIdx, PatchAccountReq patchAccountReq) throws BaseException {
+        try{
+            if(accountDao.updateAccount(accountIdx, patchAccountReq) == 0){
+                throw new BaseException(PATCH_FAIL_ACCOUNT);
+            }
+        }
+        catch (Exception exception){
             throw new BaseException(DATABASE_ERROR);
         }
     }
