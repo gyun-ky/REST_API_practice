@@ -2,10 +2,7 @@ package com.example.demo.src.account;
 
 import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponse;
-import com.example.demo.src.account.model.GetAccountRes;
-import com.example.demo.src.account.model.PatchAccountReq;
-import com.example.demo.src.account.model.PostAccountReq;
-import com.example.demo.src.account.model.PostAccountRes;
+import com.example.demo.src.account.model.*;
 import com.example.demo.src.user.UserProvider;
 import com.example.demo.src.user.UserService;
 import com.example.demo.src.user.model.GetUserRes;
@@ -91,6 +88,34 @@ public class AccountController {
             return new BaseResponse<>((exception.getStatus()));
         }
 
+    }
+
+    @ResponseBody
+    @GetMapping("/{accountIdx}/following")
+    public BaseResponse<List<FollowingAccount>> retrieveFollowingAccount(@PathVariable int accountIdx){
+        System.out.println("[GET] followingAccount route");
+        try{
+            List<FollowingAccount> followingAccount = accountProvider.retrieveFollowingAccount(accountIdx);
+
+            return new BaseResponse<>(followingAccount);
+        }
+        catch (BaseException exception){
+            return new BaseResponse<>(exception.getStatus());
+        }
+    }
+
+    @ResponseBody
+    @GetMapping("/{accountIdx}/follower")
+    public BaseResponse<List<FollowerAccount>> retrieveFollowerAccount(@PathVariable int accountIdx){
+        System.out.println("[GET] followerAccount route");
+        try{
+            List<FollowerAccount> followerAccount = accountProvider.retrieveFollowerAccount(accountIdx);
+
+            return new BaseResponse<>(followerAccount);
+        }
+        catch (BaseException exception){
+            return new BaseResponse<>(exception.getStatus());
+        }
     }
 
 }

@@ -1,8 +1,6 @@
 package com.example.demo.src.account;
 
-import com.example.demo.src.account.model.GetAccountRes;
-import com.example.demo.src.account.model.PatchAccountReq;
-import com.example.demo.src.account.model.PostAccountReq;
+import com.example.demo.src.account.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -75,6 +73,40 @@ public class AccountDao {
         System.out.println("[DAO] account update complete");
         return status;
 
+    }
+
+    public List<FollowerAccount> retrieveFollowerAccount(int accountIdx){
+
+        String query = "SELECT followerIdx, accountId, account.accountName, profileImgUrl FROM Following " +
+                "INNER JOIN " +
+                "    (SELECT idx, accountId, accountName, profileImgUrl FROM Account) account on Following.followerIdx=account.idx " +
+                "WHERE followedIdx=? and status='ACTIVE' ";
+        int param = accountIdx;
+
+        return this.jdbcTemplate.query(query,
+                (rs, rsNum)->new FollowerAccount(
+                        rs.getInt("followerIdx"),
+                        rs.getString("accountId"),
+                        rs.getString("accountName"),
+                        rs.getString("profileImgUrl")
+                ), param);
+    }
+
+    public List<FollowingAccount> retrieveFollowingAccount(int accountIdx){
+
+        String query = "SELECT followedIdx, accountId, account.accountName, profileImgUrl FROM Following " +
+                "INNER JOIN " +
+                "    (SELECT idx, accountId, accountName, profileImgUrl FROM Account) account on Following.followedIdx=account.idx " +
+                "WHERE followerIdx=? and status='ACTIVE' ";
+        int param = accountIdx;
+
+        return this.jdbcTemplate.query(query,
+                (rs, rsNum)->new FollowingAccount(
+                        rs.getInt("followedIdx"),
+                        rs.getString("accountId"),
+                        rs.getString("accountName"),
+                        rs.getString("profileImgUrl")
+                ), param);
     }
 
     public int checkAccountId(String newAccountId){

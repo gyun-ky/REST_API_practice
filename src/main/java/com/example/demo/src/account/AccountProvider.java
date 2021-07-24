@@ -1,6 +1,8 @@
 package com.example.demo.src.account;
 
 import com.example.demo.config.BaseException;
+import com.example.demo.src.account.model.FollowerAccount;
+import com.example.demo.src.account.model.FollowingAccount;
 import com.example.demo.src.account.model.GetAccountRes;
 import com.example.demo.src.account.model.PostAccountRes;
 import com.example.demo.utils.JwtService;
@@ -43,6 +45,30 @@ public class AccountProvider {
             List<GetAccountRes> getAccountResList = accountDao.getAllAccount();
 
             return getAccountResList;
+        }
+        catch(Exception exception){
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public List<FollowingAccount> retrieveFollowingAccount(int accountIdx) throws BaseException{
+        System.out.println("[PROVIDER] retrieveFollowingAccount");
+        try{
+            List<FollowingAccount> followingAccounts = accountDao.retrieveFollowingAccount(accountIdx);
+
+            return followingAccounts;
+        }
+        catch(Exception exception){
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public List<FollowerAccount> retrieveFollowerAccount(int accountIdx) throws BaseException{
+        System.out.println("[PROVIDER] retrieveFollowingAccount");
+        try{
+            List<FollowerAccount> followerAccounts = accountDao.retrieveFollowerAccount(accountIdx);
+
+            return followerAccounts;
         }
         catch(Exception exception){
             throw new BaseException(DATABASE_ERROR);

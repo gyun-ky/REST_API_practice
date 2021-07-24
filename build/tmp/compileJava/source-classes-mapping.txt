@@ -1,77 +1,109 @@
 com/example/demo/src/post/PostController.java
  com.example.demo.src.post.PostController
-com/example/demo/src/user/model/PostUserReq.java
- com.example.demo.src.user.model.PostUserReq
+com/example/demo/src/account/model/FollowingAccount.java
+ com.example.demo.src.account.model.FollowingAccount
 com/example/demo/config/Constant.java
  com.example.demo.config.Constant
 com/example/demo/src/account/model/PatchAccountReq.java
  com.example.demo.src.account.model.PatchAccountReq
 com/example/demo/src/accountHome/model/AccountHomePost.java
  com.example.demo.src.accountHome.model.AccountHomePost
+com/example/demo/src/directMessage/model/GetDirectMessageListRes.java
+ com.example.demo.src.directMessage.model.GetDirectMessageListRes
 com/example/demo/utils/ValidationRegex.java
  com.example.demo.utils.ValidationRegex
-com/example/demo/src/user/model/PostLoginRes.java
- com.example.demo.src.user.model.PostLoginRes
-com/example/demo/src/account/AccountDao.java
- com.example.demo.src.account.AccountDao
-com/example/demo/src/user/UserDao.java
- com.example.demo.src.user.UserDao
 com/example/demo/src/accountHome/model/GetAccountHomeRes.java
  com.example.demo.src.accountHome.model.GetAccountHomeRes
-com/example/demo/utils/AES128.java
- com.example.demo.utils.AES128
 com/example/demo/src/account/model/GetAccountRes.java
  com.example.demo.src.account.model.GetAccountRes
 com/example/demo/config/BaseResponseStatus.java
  com.example.demo.config.BaseResponseStatus
+com/example/demo/src/accountHome/AccountHomeProvider.java
+ com.example.demo.src.accountHome.AccountHomeProvider
+com/example/demo/src/accountHome/model/AccountInfo.java
+ com.example.demo.src.accountHome.model.AccountInfo
+com/example/demo/src/feed/model/UserInfo.java
+ com.example.demo.src.feed.model.UserInfo
+com/example/demo/src/accountHome/model/StoryGroup.java
+ com.example.demo.src.accountHome.model.StoryGroup
+com/example/demo/config/secret/Secret.java
+ com.example.demo.config.secret.Secret
+com/example/demo/src/post/PostDao.java
+ com.example.demo.src.post.PostDao
+com/example/demo/src/user/model/PostUserRes.java
+ com.example.demo.src.user.model.PostUserRes
+com/example/demo/config/BaseResponse.java
+ com.example.demo.config.BaseResponse
+com/example/demo/src/account/model/FollowerAccount.java
+ com.example.demo.src.account.model.FollowerAccount
+com/example/demo/src/directMessage/DirectMessageProvider.java
+ com.example.demo.src.directMessage.DirectMessageProvider
+com/example/demo/src/user/UserService.java
+ com.example.demo.src.user.UserService
+com/example/demo/src/directMessage/DirectMessageDao.java
+ com.example.demo.src.directMessage.DirectMessageDao
+com/example/demo/src/feed/model/Story.java
+ com.example.demo.src.feed.model.Story
+com/example/demo/config/BaseException.java
+ com.example.demo.config.BaseException
+com/example/demo/src/accountHome/AccountHomeService.java
+ com.example.demo.src.accountHome.AccountHomeService
+com/example/demo/src/feed/model/Post.java
+ com.example.demo.src.feed.model.Post
+com/example/demo/src/user/model/PostUserReq.java
+ com.example.demo.src.user.model.PostUserReq
+com/example/demo/src/post/PostProvider.java
+ com.example.demo.src.post.PostProvider
+com/example/demo/src/user/model/PostLoginRes.java
+ com.example.demo.src.user.model.PostLoginRes
+com/example/demo/src/feed/FeedDao.java
+ com.example.demo.src.feed.FeedDao
+com/example/demo/src/account/AccountDao.java
+ com.example.demo.src.account.AccountDao
+com/example/demo/src/feed/model/GetFeedRes.java
+ com.example.demo.src.feed.model.GetFeedRes
+com/example/demo/src/user/UserDao.java
+ com.example.demo.src.user.UserDao
+com/example/demo/utils/AES128.java
+ com.example.demo.utils.AES128
 com/example/demo/src/user/model/PatchUserReq.java
  com.example.demo.src.user.model.PatchUserReq
+com/example/demo/src/feed/model/PostImage.java
+ com.example.demo.src.feed.model.PostImage
 com/example/demo/src/WebSecurityConfig.java
  com.example.demo.src.WebSecurityConfig
 com/example/demo/src/accountHome/model/AccountCntInfo.java
  com.example.demo.src.accountHome.model.AccountCntInfo
-com/example/demo/src/accountHome/AccountHomeProvider.java
- com.example.demo.src.accountHome.AccountHomeProvider
 com/example/demo/src/account/model/PostAccountReq.java
  com.example.demo.src.account.model.PostAccountReq
-com/example/demo/src/accountHome/model/AccountInfo.java
- com.example.demo.src.accountHome.model.AccountInfo
 com/example/demo/src/test/TestController.java
  com.example.demo.src.test.TestController
 com/example/demo/src/account/AccountProvider.java
  com.example.demo.src.account.AccountProvider
 com/example/demo/src/user/model/PostLoginReq.java
  com.example.demo.src.user.model.PostLoginReq
+com/example/demo/src/feed/FeedProvider.java
+ com.example.demo.src.feed.FeedProvider
 com/example/demo/src/account/AccountService.java
  com.example.demo.src.account.AccountService
 com/example/demo/src/account/model/PostAccountRes.java
  com.example.demo.src.account.model.PostAccountRes
-com/example/demo/src/accountHome/model/StoryGroup.java
- com.example.demo.src.accountHome.model.StoryGroup
-com/example/demo/config/secret/Secret.java
- com.example.demo.config.secret.Secret
-com/example/demo/src/user/model/PostUserRes.java
- com.example.demo.src.user.model.PostUserRes
+com/example/demo/src/directMessage/DirectMessageController.java
+ com.example.demo.src.directMessage.DirectMessageController
 com/example/demo/src/user/UserController.java
  com.example.demo.src.user.UserController
-com/example/demo/config/BaseResponse.java
- com.example.demo.config.BaseResponse
 com/example/demo/src/account/AccountController.java
  com.example.demo.src.account.AccountController
+com/example/demo/src/feed/FeedController.java
+ com.example.demo.src.feed.FeedController
 com/example/demo/src/user/model/User.java
  com.example.demo.src.user.model.User
-com/example/demo/src/user/UserService.java
- com.example.demo.src.user.UserService
 com/example/demo/src/user/model/GetUserRes.java
  com.example.demo.src.user.model.GetUserRes
-com/example/demo/config/BaseException.java
- com.example.demo.config.BaseException
 com/example/demo/DemoApplication.java
  com.example.demo.DemoApplication
 com/example/demo/utils/JwtService.java
  com.example.demo.utils.JwtService
-com/example/demo/src/accountHome/AccountHomeService.java
- com.example.demo.src.accountHome.AccountHomeService
 com/example/demo/src/user/UserProvider.java
  com.example.demo.src.user.UserProvider
 com/example/demo/src/accountHome/AccountHomeController.java
