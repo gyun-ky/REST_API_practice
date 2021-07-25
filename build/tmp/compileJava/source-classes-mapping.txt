@@ -1,3 +1,5 @@
+com/example/demo/src/post/model/Comment.java
+ com.example.demo.src.post.model.Comment
 com/example/demo/src/post/PostController.java
  com.example.demo.src.post.PostController
 com/example/demo/src/account/model/FollowingAccount.java
@@ -18,18 +20,26 @@ com/example/demo/src/account/model/GetAccountRes.java
  com.example.demo.src.account.model.GetAccountRes
 com/example/demo/config/BaseResponseStatus.java
  com.example.demo.config.BaseResponseStatus
+com/example/demo/src/post/model/PatchCommentsRes.java
+ com.example.demo.src.post.model.PatchCommentsRes
 com/example/demo/src/accountHome/AccountHomeProvider.java
  com.example.demo.src.accountHome.AccountHomeProvider
 com/example/demo/src/accountHome/model/AccountInfo.java
  com.example.demo.src.accountHome.model.AccountInfo
 com/example/demo/src/feed/model/UserInfo.java
  com.example.demo.src.feed.model.UserInfo
+com/example/demo/src/post/PostService.java
+ com.example.demo.src.post.PostService
 com/example/demo/src/accountHome/model/StoryGroup.java
  com.example.demo.src.accountHome.model.StoryGroup
+com/example/demo/src/post/model/PostInfo.java
+ com.example.demo.src.post.model.PostInfo
 com/example/demo/config/secret/Secret.java
  com.example.demo.config.secret.Secret
 com/example/demo/src/post/PostDao.java
  com.example.demo.src.post.PostDao
+com/example/demo/src/post/model/PatchCommentReq.java
+ com.example.demo.src.post.model.PatchCommentReq
 com/example/demo/src/user/model/PostUserRes.java
  com.example.demo.src.user.model.PostUserRes
 com/example/demo/config/BaseResponse.java
@@ -50,6 +60,8 @@ com/example/demo/src/accountHome/AccountHomeService.java
  com.example.demo.src.accountHome.AccountHomeService
 com/example/demo/src/feed/model/Post.java
  com.example.demo.src.feed.model.Post
+com/example/demo/src/post/model/GetCommentsRes.java
+ com.example.demo.src.post.model.GetCommentsRes
 com/example/demo/src/user/model/PostUserReq.java
  com.example.demo.src.user.model.PostUserReq
 com/example/demo/src/post/PostProvider.java
@@ -88,6 +100,8 @@ com/example/demo/src/account/AccountService.java
  com.example.demo.src.account.AccountService
 com/example/demo/src/account/model/PostAccountRes.java
  com.example.demo.src.account.model.PostAccountRes
+com/example/demo/src/post/model/PostCommentReq.java
+ com.example.demo.src.post.model.PostCommentReq
 com/example/demo/src/directMessage/DirectMessageController.java
  com.example.demo.src.directMessage.DirectMessageController
 com/example/demo/src/user/UserController.java
@@ -96,6 +110,8 @@ com/example/demo/src/account/AccountController.java
  com.example.demo.src.account.AccountController
 com/example/demo/src/feed/FeedController.java
  com.example.demo.src.feed.FeedController
+com/example/demo/src/post/model/PostCommentRes.java
+ com.example.demo.src.post.model.PostCommentRes
 com/example/demo/src/user/model/User.java
  com.example.demo.src.user.model.User
 com/example/demo/src/user/model/GetUserRes.java

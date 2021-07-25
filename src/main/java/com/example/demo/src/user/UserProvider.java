@@ -2,6 +2,7 @@ package com.example.demo.src.user;
 
 
 import com.example.demo.config.BaseException;
+import com.example.demo.config.BaseResponseStatus;
 import com.example.demo.config.secret.Secret;
 import com.example.demo.src.user.model.*;
 import com.example.demo.utils.AES128;
@@ -76,13 +77,18 @@ public class UserProvider {
         User user = userDao.getPwd(postLoginReq);
         String password;
         try {
-            password = new AES128(Secret.USER_INFO_PASSWORD_KEY).decrypt(user.getPassword());
+            password = new AES128(Secret.USER_INFO_PASSWORD_KEY).decrypt(user.getUserPwd());
         } catch (Exception ignored) {
             throw new BaseException(PASSWORD_DECRYPTION_ERROR);
         }
 
-        if(postLoginReq.getPassword().equals(password)){
-            int userIdx = userDao.getPwd(postLoginReq).getUserIdx();
+        // 유져 비활성화 상태인 경우
+        if(user.getStatus() == "INACTIVE"){
+            throw new BaseException(FAILED_TO_LOGIN);
+        }
+
+        if(postLoginReq.getUserPwd().equals(password)){
+            int userIdx = userDao.getPwd(postLoginReq).getIdx();
             String jwt = jwtService.createJwt(userIdx);
             return new PostLoginRes(userIdx,jwt);
         }
@@ -90,6 +96,16 @@ public class UserProvider {
             throw new BaseException(FAILED_TO_LOGIN);
         }
 
+
+    }
+
+    public int getUserIdxByAccountIdx(int accountIdx) throws BaseException{
+        try{
+            return userDao.getUserIdxByAccountIdx(accountIdx);
+        }
+        catch(Exception e){
+            throw new BaseException(BaseResponseStatus.DATABASE_ERROR);
+        }
     }
 
 }

@@ -9,9 +9,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class GetUserRes {
-    private int userIdx;
+    private int idx;
+    private String userId;
+    private String userPwd;
     private String userName;
-    private String ID;
     private String email;
-    private String password;
 }

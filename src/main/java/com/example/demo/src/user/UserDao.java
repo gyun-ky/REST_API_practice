@@ -59,12 +59,13 @@ public class UserDao {
     
 
     public int createUser(PostUserReq postUserReq){
-        String createUserQuery = "insert into UserInfo (userName, ID, password, email) VALUES (?,?,?,?)";
-        Object[] createUserParams = new Object[]{postUserReq.getUserName(), postUserReq.getId(), postUserReq.getPassword(), postUserReq.getEmail()};
-        this.jdbcTemplate.update(createUserQuery, createUserParams);
+        String createUserQuery = "insert into User (userId, userPwd, userName, email, phoneNumber, gender, birthday) VALUES (?,?,?,?,?,?,?)";
+        Object[] createUserParams = new Object[]{postUserReq.getUserId(), postUserReq.getUserPwd(), postUserReq.getUserName(), postUserReq.getEmail(), postUserReq.getPhoneNumber(), postUserReq.getGender(), postUserReq.getBirthday()};
+        int userIdx = this.jdbcTemplate.update(createUserQuery, createUserParams);
+        System.out.println("[DAO] createUser : last insert id = " + userIdx);
 
-        String lastInserIdQuery = "select last_insert_id()";
-        return this.jdbcTemplate.queryForObject(lastInserIdQuery,int.class);
+        String lastInsertIdQuery = "select last_insert_id()";
+        return this.jdbcTemplate.queryForObject(lastInsertIdQuery,int.class);
     }
 
     public int checkEmail(String email){
@@ -84,20 +85,30 @@ public class UserDao {
     }
 
     public User getPwd(PostLoginReq postLoginReq){
-        String getPwdQuery = "select userIdx, password,email,userName,ID from UserInfo where ID = ?";
-        String getPwdParams = postLoginReq.getId();
+        String getPwdQuery = "select idx, userId, userPwd, email, userName, status from User where userId = ?";
+        String getPwdParams = postLoginReq.getUserId();
 
         return this.jdbcTemplate.queryForObject(getPwdQuery,
                 (rs,rowNum)-> new User(
-                        rs.getInt("userIdx"),
-                        rs.getString("ID"),
+                        rs.getInt("idx"),
+                        rs.getString("userId"),
+                        rs.getString("userPwd"),
                         rs.getString("userName"),
-                        rs.getString("password"),
-                        rs.getString("email")
+                        rs.getString("email"),
+                        rs.getString("status")
                 ),
                 getPwdParams
                 );
 
+    }
+
+    public int getUserIdxByAccountIdx(int accountIdx){
+        String query = "SELECT userIdx FROM Account WHERE idx = ?";
+
+        int result = this.jdbcTemplate.queryForObject(query,
+                int.class,accountIdx);
+        System.out.println("[DAO] getUserIdxByAccountIdx");
+        return result;
     }
 
 

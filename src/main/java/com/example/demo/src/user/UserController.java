@@ -44,21 +44,21 @@ public class UserController {
      * @return BaseResponse<List<GetUserRes>>
      */
     //Query String
-    @ResponseBody
-    @GetMapping("") // (GET) 127.0.0.1:9000/app/users
-    public BaseResponse<List<GetUserRes>> getUsers(@RequestParam(required = false) String Email) {
-        try{
-            if(Email == null){
-                List<GetUserRes> getUsersRes = userProvider.getUsers();
-                return new BaseResponse<>(getUsersRes);
-            }
-            // Get Users
-            List<GetUserRes> getUsersRes = userProvider.getUsersByEmail(Email);
-            return new BaseResponse<>(getUsersRes);
-        } catch(BaseException exception){
-            return new BaseResponse<>((exception.getStatus()));
-        }
-    }
+//    @ResponseBody
+//    @GetMapping("") // (GET) 127.0.0.1:9000/app/users
+//    public BaseResponse<List<GetUserRes>> getUsers(@RequestParam(required = false) String Email) {
+//        try{
+//            if(Email == null){
+//                List<GetUserRes> getUsersRes = userProvider.getUsers();
+//                return new BaseResponse<>(getUsersRes);
+//            }
+//            // Get Users
+//            List<GetUserRes> getUsersRes = userProvider.getUsersByEmail(Email);
+//            return new BaseResponse<>(getUsersRes);
+//        } catch(BaseException exception){
+//            return new BaseResponse<>((exception.getStatus()));
+//        }
+//    }
 
     /**
      * 회원 1명 조회 API
@@ -66,18 +66,18 @@ public class UserController {
      * @return BaseResponse<GetUserRes>
      */
     // Path-variable
-    @ResponseBody
-    @GetMapping("/{userIdx}") // (GET) 127.0.0.1:9000/app/users/:userIdx
-    public BaseResponse<GetUserRes> getUser(@PathVariable("userIdx") int userIdx) {
-        // Get Users
-        try{
-            GetUserRes getUserRes = userProvider.getUser(userIdx);
-            return new BaseResponse<>(getUserRes);
-        } catch(BaseException exception){
-            return new BaseResponse<>((exception.getStatus()));
-        }
-
-    }
+//    @ResponseBody
+//    @GetMapping("/{userIdx}") // (GET) 127.0.0.1:9000/app/users/:userIdx
+//    public BaseResponse<GetUserRes> getUser(@PathVariable("userIdx") int userIdx) {
+//        // Get Users
+//        try{
+//            GetUserRes getUserRes = userProvider.getUser(userIdx);
+//            return new BaseResponse<>(getUserRes);
+//        } catch(BaseException exception){
+//            return new BaseResponse<>((exception.getStatus()));
+//        }
+//
+//    }
 
     /**
      * 회원가입 API
@@ -95,6 +95,10 @@ public class UserController {
         //이메일 정규표현
         if(!isRegexEmail(postUserReq.getEmail())){
             return new BaseResponse<>(POST_USERS_INVALID_EMAIL);
+        }
+
+        if(postUserReq.getGender() != "MALE" && postUserReq.getGender() != "FEMALE"){
+            return new BaseResponse<>(POST_USERS_INVALID_GENDER);
         }
         try{
             PostUserRes postUserRes = userService.createUser(postUserReq);
