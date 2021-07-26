@@ -2,6 +2,7 @@ package com.example.demo.src.account;
 
 import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponse;
+import com.example.demo.config.BaseResponseStatus;
 import com.example.demo.src.account.model.*;
 import com.example.demo.src.user.UserProvider;
 import com.example.demo.src.user.UserService;
@@ -27,13 +28,15 @@ public class AccountController {
     private final AccountService accountService;
     @Autowired
     private final JwtService jwtService;
+    @Autowired
+    private final UserProvider userProvider;
 
-    public AccountController(AccountProvider accountProvider, AccountService accountService, JwtService jwtService) {
+    public AccountController(AccountProvider accountProvider, AccountService accountService, JwtService jwtService, UserProvider userProvider) {
         this.accountProvider = accountProvider;
         this.accountService = accountService;
         this.jwtService = jwtService;
+        this.userProvider = userProvider;
     }
-
 
     @ResponseBody
     @GetMapping("")
@@ -75,8 +78,14 @@ public class AccountController {
 
     @ResponseBody
     @PatchMapping("/{accountIdx}")
-    public BaseResponse<String> patchAccount(@PathVariable int accountIdx, @RequestBody PatchAccountReq patchAccountReq){
+    public BaseResponse<String> patchAccount(@PathVariable int accountIdx, @RequestBody PatchAccountReq patchAccountReq) throws BaseException{
         System.out.println("[PATCH] pathAccount route");
+
+        int userIdxByJwt = jwtService.getUserIdx();
+        int userIdxByPath = userProvider.getUserIdxByAccountIdx(accountIdx);
+        if(userIdxByJwt != userIdxByPath){
+            return new BaseResponse<>(BaseResponseStatus.INVALID_USER_JWT);
+        }
 
         try{
             accountService.patchAccount(accountIdx, patchAccountReq);

@@ -2,13 +2,12 @@ package com.example.demo.src.post;
 
 import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponseStatus;
-import com.example.demo.src.post.model.PatchCommentReq;
-import com.example.demo.src.post.model.PatchCommentsRes;
-import com.example.demo.src.post.model.PostCommentReq;
-import com.example.demo.src.post.model.PostCommentRes;
+import com.example.demo.src.post.model.*;
 import com.example.demo.utils.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PostService {
@@ -67,5 +66,25 @@ public class PostService {
         catch (Exception e){
             throw new BaseException(BaseResponseStatus.DATABASE_ERROR);
         }
+    }
+
+    public PostPostRes createPost(int accountIdx, PostPostReq postPostReq) throws BaseException{
+        System.out.println("[SERVICE] createPost service");
+        try {
+            //locationTag 미리 존재하는지 점검
+            //1. 존재하면 idx 가져오고
+            //2. 존재하지 않으면 새로 만든 후 idx 가져온다
+            int locationTagIdx = postDao.checkLocationTag(postPostReq.getLocationTag());
+
+            int postIdx = postDao.createPost(accountIdx, locationTagIdx, postPostReq);
+
+            postDao.createHashTag(postIdx, postPostReq);
+
+            return new PostPostRes(postIdx);
+        }
+        catch (Exception e){
+            throw new BaseException(BaseResponseStatus.DATABASE_ERROR);
+        }
+
     }
 }

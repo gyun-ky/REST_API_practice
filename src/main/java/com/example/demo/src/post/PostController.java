@@ -131,12 +131,16 @@ public class PostController {
             return new BaseResponse<>(BaseResponseStatus.INVALID_USER_JWT);
         }
 
-//        try{
-//            return new BaseResponse<>(new PostPostRes(1));
-//        }
-//        catch(BaseException e){
-//            throw new BaseException(e.getStatus());
-//        }
-        return new BaseResponse<>(new PostPostRes(1));
+
+        try{
+            PostPostRes result = postService.createPost(accountIdx, postPostReq);
+
+            return new BaseResponse<>(result);
+        }
+        catch(BaseException e){
+            throw new BaseException(e.getStatus());
+        }
     }
+
+
 }

@@ -1,5 +1,7 @@
 package com.example.demo.src.post;
 
+import com.example.demo.config.BaseException;
+import com.example.demo.src.feed.model.Post;
 import com.example.demo.src.post.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -87,9 +89,11 @@ public class PostDao {
             };
         }
 
-        int commentIdx = this.jdbcTemplate.update(query,params);
+        this.jdbcTemplate.update(query,params);
         System.out.println("[DAO] createPostComment complete");
-        return commentIdx;
+        String lastInsertIdQuery = "select last_insert_id()";
+        return this.jdbcTemplate.queryForObject(lastInsertIdQuery,int.class);
+
     }
 
     public int updatePostComment(int commentIdx, PatchCommentReq patchCommentsReq){
@@ -123,5 +127,79 @@ public class PostDao {
         boolean result = this.jdbcTemplate.queryForObject(query, boolean.class, params);
         System.out.println("[DAO] checkCommentWriter : " + result);
         return result;
+    }
+
+    public int checkLocationTag(String tagName){
+        String query = "SELECT idx FROM LocationTag WHERE location=?";
+        try{
+            int idx = this.jdbcTemplate.queryForObject(query, int.class, tagName);
+            System.out.println("[DAO] checkLocationTag exists! ");
+            return idx;
+        }
+        catch (Exception e){
+            String query2 = "INSERT INTO LocationTag (location) value (?)";
+            this.jdbcTemplate.update(query2,tagName);
+            System.out.println("[DAO] checkLocationTag NotEXIST! CREATE!");
+            String lastInsertIdQuery = "select last_insert_id()";
+            return this.jdbcTemplate.queryForObject(lastInsertIdQuery,int.class);
+        }
+
+
+//        int idx = this.jdbcTemplate.queryForObject(query, int.class, tagName);
+//        System.out.println("[DAO] checkLocationTag exists! ");
+//
+//        if(idx == 0){
+//            String query2 = "INSERT INTO LocationTag (location) value (?)";
+//            int newIdx = this.jdbcTemplate.update(query,tagName);
+//            System.out.println("[DAO] checkLocationTag NotEXIST! CREATE!");
+//            return newIdx;
+//        }
+//        else{
+//            return idx;
+//        }
+
+    }
+
+    public int createPost(int accountIdx, int locationTagIdx, PostPostReq postPostReq){
+        String query = "INSERT INTO Post (accountIdx, locationTagIdx, contents) values (?,?,?)";
+        Object[] params = new Object[]{
+                accountIdx, locationTagIdx, postPostReq.getContents()
+        };
+
+        this.jdbcTemplate.update(query, params);
+        String lastInsertIdQuery = "select last_insert_id()";
+        int postIdx= this.jdbcTemplate.queryForObject(lastInsertIdQuery,int.class);
+
+        System.out.println("[DAO] createPost post - complete");
+
+        List<PostImage> postImages = postPostReq.getImages();
+        postImages.forEach(item->{
+            String imageQuery = "INSERT INTO PostImage (postIdx, imageUrl) values (?,?)";
+            Object[] imageParams = new Object[]{
+                    postIdx, item.getImageUrl()
+            };
+
+            this.jdbcTemplate.update(imageQuery, imageParams);
+            int imageIdx =jdbcTemplate.queryForObject(lastInsertIdQuery,int.class);
+            System.out.println("[DAO] postImage create - "+ imageIdx);
+        });
+        return postIdx;
+
+    }
+
+    public void createHashTag(int postIdx, PostPostReq postPostReq){
+
+        List<HashTag> hashTags = postPostReq.getHashTags();
+        hashTags.forEach(item->{
+            String tagQuery = "INSERT INTO HashTag (postIdx, tagName) values (?,?)";
+            Object[] imageParams = new Object[]{
+                    postIdx, item.getTagName()
+            };
+
+            this.jdbcTemplate.update(tagQuery,imageParams);
+            String lastInsertIdQuery = "select last_insert_id()";
+            int tagIdx = this.jdbcTemplate.queryForObject(lastInsertIdQuery,int.class);
+            System.out.println("[DAO] hashTag create - "+ tagIdx);
+        });
     }
 }

@@ -14,6 +14,8 @@ com/example/demo/src/directMessage/model/GetDirectMessageListRes.java
  com.example.demo.src.directMessage.model.GetDirectMessageListRes
 com/example/demo/utils/ValidationRegex.java
  com.example.demo.utils.ValidationRegex
+com/example/demo/src/post/model/PostPostReq.java
+ com.example.demo.src.post.model.PostPostReq
 com/example/demo/src/accountHome/model/GetAccountHomeRes.java
  com.example.demo.src.accountHome.model.GetAccountHomeRes
 com/example/demo/src/account/model/GetAccountRes.java
@@ -54,6 +56,8 @@ com/example/demo/src/directMessage/DirectMessageDao.java
  com.example.demo.src.directMessage.DirectMessageDao
 com/example/demo/src/feed/model/Story.java
  com.example.demo.src.feed.model.Story
+com/example/demo/src/post/model/PostPostRes.java
+ com.example.demo.src.post.model.PostPostRes
 com/example/demo/config/BaseException.java
  com.example.demo.config.BaseException
 com/example/demo/src/accountHome/AccountHomeService.java
@@ -64,10 +68,10 @@ com/example/demo/src/post/model/GetCommentsRes.java
  com.example.demo.src.post.model.GetCommentsRes
 com/example/demo/src/user/model/PostUserReq.java
  com.example.demo.src.user.model.PostUserReq
-com/example/demo/src/post/PostProvider.java
- com.example.demo.src.post.PostProvider
 com/example/demo/src/user/model/PostLoginRes.java
  com.example.demo.src.user.model.PostLoginRes
+com/example/demo/src/post/PostProvider.java
+ com.example.demo.src.post.PostProvider
 com/example/demo/src/feed/FeedDao.java
  com.example.demo.src.feed.FeedDao
 com/example/demo/src/account/AccountDao.java
@@ -90,6 +94,8 @@ com/example/demo/src/account/model/PostAccountReq.java
  com.example.demo.src.account.model.PostAccountReq
 com/example/demo/src/test/TestController.java
  com.example.demo.src.test.TestController
+com/example/demo/src/post/model/HashTag.java
+ com.example.demo.src.post.model.HashTag
 com/example/demo/src/account/AccountProvider.java
  com.example.demo.src.account.AccountProvider
 com/example/demo/src/user/model/PostLoginReq.java
@@ -102,6 +108,8 @@ com/example/demo/src/account/model/PostAccountRes.java
  com.example.demo.src.account.model.PostAccountRes
 com/example/demo/src/post/model/PostCommentReq.java
  com.example.demo.src.post.model.PostCommentReq
+com/example/demo/src/post/model/PostImage.java
+ com.example.demo.src.post.model.PostImage
 com/example/demo/src/directMessage/DirectMessageController.java
  com.example.demo.src.directMessage.DirectMessageController
 com/example/demo/src/user/UserController.java

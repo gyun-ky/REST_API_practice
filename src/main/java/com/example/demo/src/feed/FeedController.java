@@ -2,7 +2,9 @@ package com.example.demo.src.feed;
 
 import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponse;
+import com.example.demo.config.BaseResponseStatus;
 import com.example.demo.src.feed.model.GetFeedRes;
+import com.example.demo.src.user.UserProvider;
 import com.example.demo.utils.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,17 +20,26 @@ public class FeedController {
 
     private final JwtService jwtService;
 
-    @Autowired
+    private final UserProvider userProvider;
 
-    public FeedController(FeedProvider feedProvider, JwtService jwtService) {
+    @Autowired
+    public FeedController(FeedProvider feedProvider, JwtService jwtService, UserProvider userProvider) {
         this.feedProvider = feedProvider;
         this.jwtService = jwtService;
+        this.userProvider = userProvider;
     }
 
     @ResponseBody
     @GetMapping("/{accountIdx}")
     public BaseResponse<GetFeedRes> retrieveFeed(@PathVariable int accountIdx) throws BaseException {
         System.out.println("[GET] retrieveFeed route");
+
+        int userIdxByJwt = jwtService.getUserIdx();
+        int userIdxByPath = userProvider.getUserIdxByAccountIdx(accountIdx);
+        if(userIdxByJwt != userIdxByPath){
+            return new BaseResponse<>(BaseResponseStatus.INVALID_USER_JWT);
+        }
+
         try{
             GetFeedRes result = feedProvider.retrieveFeed(accountIdx);
             return new BaseResponse<>(result);
